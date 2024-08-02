@@ -1,155 +1,260 @@
 variable "aws_region" {
-  description = "The AWS region where resources will be created"
-  default = "us-east-1"
+  description = "The AWS region to create resources in"
+  type        = string
+  default     = "us-east-1"
 }
 
 variable "alb_name" {
-  description = "Name of the ALB"
-  default = "my-alb"
+  description = "The name of the ALB"
+  type        = string
+  default     = "my-alb"
 }
 
 variable "alb_internal" {
-  description = "Boolean flag indicating if the ALB is internal (true/false)"
-  default = true
+  description = "Whether the ALB is internal or external"
+  type        = bool
+  default     = true
 }
 
-variable "nlb_name" {
-  description = "Name of the NLB"
-  default = "my-nlb"
+variable "alb_target_group_name" {
+  description = "The name of the target group for ALB"
+  type        = string
+  default     = "my-alb-target-group"
 }
 
-variable "nlb_internal" {
-  description = "Boolean flag indicating if the NLB is internal (true/false)"
-  default = true
+variable "cluster_name"{
+    description = "Name of the eks cluster to update in the alb tag"
+    type = string
+    default = "eks-cluster"
 }
 
-
-variable "target_group_name" {
-  description = "Name of the target group"
-  default = "my-tg"
-}
-
-variable "target_group_port" {
-  description = "Port on which targets receive traffic from the load balancer"
+variable "alb_target_group_port" {
+  description = "The port for the ALB target group"
+  type        = number
   default     = 80
 }
 
-variable "target_group_protocol" {
-  description = "Protocol used for the targets in the target group"
-  default     = "TCP"
-}
-
-variable "target_group_health_check_path" {
-  description = "The destination for the health check request"
-  default     = "/"
-}
-
-variable "target_group_health_check_port" {
-  description = "The port to use to connect with the target for health checking"
-  default     = 80
-}
-
-variable "target_group_health_check_protocol" {
-  description = "The protocol to use for the health check"
+variable "alb_target_group_protocol" {
+  description = "The protocol for the ALB target group"
+  type        = string
   default     = "HTTP"
 }
 
-variable "target_group_health_check_interval" {
-  description = "The approximate amount of time, in seconds, between health checks of an individual target"
+variable "alb_target_group_health_check_path" {
+  description = "The health check path for the ALB target group"
+  type        = string
+  default     = "/"
+}
+
+variable "alb_target_group_health_check_port" {
+  description = "The health check port for the ALB target group"
+  type        = string
+  default     = "traffic-port"
+}
+
+variable "alb_target_group_health_check_protocol" {
+  description = "The health check protocol for the ALB target group"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "alb_target_group_health_check_interval" {
+  description = "The health check interval for the ALB target group"
+  type        = number
   default     = 30
 }
 
-variable "target_group_health_check_timeout" {
-  description = "The amount of time, in seconds, during which no response means a failed health check"
-  default     = 10
+variable "alb_target_group_health_check_timeout" {
+  description = "The health check timeout for the ALB target group"
+  type        = number
+  default     = 5
 }
 
-variable "target_group_health_check_healthy_threshold" {
-  description = "The number of consecutive health checks successes required before considering an unhealthy target healthy"
-  default     = 3
+variable "alb_target_group_health_check_healthy_threshold" {
+  description = "The health check healthy threshold for the ALB target group"
+  type        = number
+  default     = 5
 }
 
-variable "target_group_health_check_unhealthy_threshold" {
-  description = "The number of consecutive health check failures required before considering the target unhealthy"
-  default     = 3
+variable "alb_target_group_health_check_unhealthy_threshold" {
+  description = "The health check unhealthy threshold for the ALB target group"
+  type        = number
+  default     = 2
 }
 
-variable "listener_port" {
-  description = "The port on which the listener listens for requests"
+variable "alb_listener_port" {
+  description = "The port for the ALB listener"
+  type        = number
   default     = 80
 }
 
-variable "listener_protocol" {
-  description = "The protocol for the listener"
+variable "alb_listener_protocol" {
+  description = "The protocol for the ALB listener"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "nlb_name" {
+  description = "The name of the NLB"
+  type        = string
+  default     = "my-nlb"
+}
+
+variable "nlb_internal" {
+  description = "Whether the NLB is internal or external"
+  type        = bool
+  default     = false
+}
+
+variable "nlb_target_group_name" {
+  description = "The name of the target group for NLB"
+  type        = string
+  default     = "my-nlb-target-group"
+}
+
+variable "nlb_target_group_port" {
+  description = "The port for the NLB target group"
+  type        = number
+  default     = 80
+}
+
+variable "nlb_target_group_protocol" {
+  description = "The protocol for the NLB target group"
+  type        = string
   default     = "TCP"
 }
 
-variable "listener_rule_priority" {
-  description = "The priority for the rule"
-  default     = 100
+variable "nlb_target_group_health_check_path" {
+  description = "The health check path for the NLB target group"
+  type        = string
+  default     = "/"
 }
 
-#variable "listener_rule_host_header" {
-#  description = "The host header condition to match for the rule"
-#}
+variable "nlb_target_group_health_check_port" {
+  description = "The health check port for the NLB target group"
+  type        = string
+  default     = "traffic-port"
+}
+
+variable "nlb_target_group_health_check_protocol" {
+  description = "The health check protocol for the NLB target group"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "nlb_target_group_health_check_interval" {
+  description = "The health check interval for the NLB target group"
+  type        = number
+  default     = 30
+}
+
+variable "nlb_target_group_health_check_timeout" {
+  description = "The health check timeout for the NLB target group"
+  type        = number
+  default     = 5
+}
+
+variable "nlb_target_group_health_check_healthy_threshold" {
+  description = "The health check healthy threshold for the NLB target group"
+  type        = number
+  default     = 5
+}
+
+variable "nlb_target_group_health_check_unhealthy_threshold" {
+  description = "The health check unhealthy threshold for the NLB target group"
+  type        = number
+  default     = 2
+}
+
+variable "nlb_listener_port" {
+  description = "The port for the NLB listener"
+  type        = number
+  default     = 80
+}
+
+variable "nlb_listener_protocol" {
+  description = "The protocol for the NLB listener"
+  type        = string
+  default     = "TCP"
+}
+
+variable "vpc_id" {
+  description = "The ID of the VPC"
+  type        = string
+  #default     = module.aws_vpc.vpc_id
+  default     = "vpc-0f7d4e18a8076a061"
+}
+
+variable "public_subnet_ids" {
+  description = "List of public subnet IDs"
+  type        = list(string)
+  #default     = module.aws_vpc.public_subnet_ids
+  default     = ["subnet-0068b3a4192bd1f7c",    "subnet-0d9594b7d0841f515"]
+}
+
+variable "private_subnet_ids" {
+  description = "List of private subnet IDs"
+  type        = list(string)
+  default     = ["subnet-06e9231507e2a04ce",    "subnet-0f9f963d467f06416"]
+
+}
 
 variable "alb_security_group_name" {
-  description = "Name of the security group for ALB"
-  default = "my-secgrp-alb"
+  description = "Name of the ALB security group"
+  type        = string
+  default     = "alb-sg"
 }
 
 variable "alb_security_group_description" {
-  description = "Description of the security group for ALB"
-  default = "my-secgrp-alb-description"
+  description = "Description of the ALB security group"
+  type        = string
+  default     = "Security group for ALB"
 }
 
 variable "alb_sg_ingress_from_port" {
-  description = "The start port (inclusive) for the ingress rule"
+  description = "Ingress from port for ALB security group"
+  type        = number
   default     = 80
 }
 
 variable "alb_sg_ingress_to_port" {
-  description = "The end port (inclusive) for the ingress rule"
+  description = "Ingress to port for ALB security group"
+  type        = number
   default     = 80
 }
 
 variable "alb_sg_ingress_protocol" {
-  description = "The protocol to apply to the ingress rule"
-  default     = "tcp"
+  description = "Ingress protocol for ALB security group"
+  type        = string
+  default     = "TCP"
 }
 
-#variable "alb_sg_ingress_cidr_blocks" {
-#  description = "List of CIDR blocks to allow inbound traffic from"
-#  type        = list(string)
-#}
+variable "alb_sg_ingress_cidr_blocks" {
+  description = "Ingress CIDR blocks for ALB security group"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
 
 variable "alb_sg_egress_from_port" {
-  description = "The start port (inclusive) for the egress rule"
+  description = "Egress from port for ALB security group"
+  type        = number
   default     = 0
 }
 
 variable "alb_sg_egress_to_port" {
-  description = "The end port (inclusive) for the egress rule"
+  description = "Egress to port for ALB security group"
+  type        = number
   default     = 0
 }
 
 variable "alb_sg_egress_protocol" {
-  description = "The protocol to apply to the egress rule"
+  description = "Egress protocol for ALB security group"
+  type        = string
   default     = "-1"
 }
 
-#variable "alb_sg_egress_cidr_blocks" {
-#  description = "List of CIDR blocks to allow outbound traffic to"
-#  type        = list(string)
-#}
-
-#variable "vpc_id" {
-#  description = "The ID of the VPC where resources will be created"
-#  default = "vpc-01fa132dc4befd45d"
-#}
-
-variable "listener_rule_host_header" {
-  description = "The host header value for the listener rule"
-  type        = string
-  default     = "example.com"
+variable "alb_sg_egress_cidr_blocks" {
+  description = "Egress CIDR blocks for ALB security group"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
 }

@@ -8,7 +8,7 @@ variable "eks_cluster_name" {
 variable "vpc_id" {
   type        = string
   description = "The ID of the existing VPC"
-  default = "vpc-0eccd78da2981e784"
+  default = "vpc-0f7d4e18a8076a061"
 }
 
 # Helm chart resource configuration

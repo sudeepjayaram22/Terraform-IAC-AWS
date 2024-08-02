@@ -1,7 +1,6 @@
 # AWS-VPC-terraform-module
 Terraform module to deploy a AWS VPC
 
-
 ## USAGE
 ```
 module "aws_vpc" {

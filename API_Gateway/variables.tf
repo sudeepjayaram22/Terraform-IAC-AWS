@@ -1,8 +1,7 @@
 variable "swagger_file_path" {
   description = "File path for the Swagger JSON file"
   type        = string
-  # default     = "../platformregistry.json"  
-  default     = "random.json"  
+  default     = "./swagger/dev/random.json"  
 }
 
 variable "vpc_cidr_block" {
@@ -14,7 +13,7 @@ variable "vpc_cidr_block" {
 variable "vpc_link_uri" {
   description = "URI for the VPC Link"
   type        = string
-  default     = "r5wrkv"  
+  default     = ""  
 }
 
 variable "path_parameters" {
@@ -32,7 +31,7 @@ variable "query_parameters" {
 variable "stage_name" {
   description = "Name of the Staging Environment"
   type        = string
-  default     = "myappqa"
+  default     = "dev"
 }
 
 variable "create_stage" {
@@ -46,7 +45,7 @@ variable "vpc_url" {
 
 variable "endpoint"{
   type = string
-  default="/api/plat"
+  default="/api/randomapi"
 }
 
 variable "waf_arn"{
@@ -59,7 +58,7 @@ variable "waf_arn"{
 variable "domain_name" {
   description = "Domain name of the API gateway"
   type = string
-  default = "myappdev.com"
+  default = "xyz.com"
 }
 
 variable "certificate_arn_no" {
@@ -78,7 +77,7 @@ variable "security_policy_value" {
 variable "vpc_link_name" {
   description = "VPC link Name for the environment for enabling communication between an API Gateway and NLB."
   type = string
-  default = "vpclink-nlb-myapp-qa"
+  default = "vpclink-nlb"
 }
 
 #Load balancer details
@@ -86,11 +85,11 @@ variable "vpc_link_name" {
 variable "load_balancer_arn" {
   description = "ARN of the load balancer for the respective environment"
   type = string
-  default = ""
+  default = "arn:aws:elasticloadbalancing:us-east-1:ghvgjbub/uyguy/uyuy"
 }
 
 variable "load_balancer_name" {
   description = "Name of the load balancer for the respective environment"
   type = string
-  default = "myapp-qa-nlb"
+  default = "my-nlb"
 }

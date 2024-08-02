@@ -1,10 +1,10 @@
 # State management for API Gateway
 terraform {
    backend "s3" {
-     bucket         = "bucket_name"
-     key            = "tfstate"
+     bucket         = ""
+     key            = "dev/API_Gateway/category/terraform.tfstate"
      encrypt        = true
-     region         = "aws_region"
+     region         = "us-east-1"
      #dynamodb_table = "terraform-state-locks"
    }
 }

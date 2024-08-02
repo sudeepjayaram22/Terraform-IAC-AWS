@@ -6,7 +6,6 @@ resource "aws_vpc" "custom_vpc" {
   }
 }
 
-
 # PUBLIC SUBNETS
 resource "aws_subnet" "public_subnets" {
   count                   = var.networking.public_subnets == null || var.networking.public_subnets == "" ? 0 : length(var.networking.public_subnets)
@@ -30,7 +29,8 @@ resource "aws_subnet" "private_subnets" {
 
   tags = {
     Name = "private_subnet-${count.index}"
-    "kubernetes.io/role/elb" = "1"
+    #"kubernetes.io/role/elb" = "1"
+    "kubernetes.io/role/internal-elb" = "1"
   }
 }
 
