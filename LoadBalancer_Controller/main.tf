@@ -1,7 +1,7 @@
 # State management for EKS
 #terraform {
 #   backend "s3" {
-#     bucket         = "myappstatemanagement"
+#     bucket         = "eldoradostatemanagement"
 #     key            = "dev/eks/LoadBalancerController/terraform.tfstate"
 #     encrypt        = true
 #     region         = "us-east-2"

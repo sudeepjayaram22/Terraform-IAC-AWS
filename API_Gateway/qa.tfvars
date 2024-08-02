@@ -1,4 +1,4 @@
-swagger_file_path="csdc.json"
-stage_name="myappqa"
+swagger_file_path=""
+stage_name=""
 vpc_url=""
-vpc_link_name="vpclink-nlb-myapp-qa"
+vpc_link_name=""

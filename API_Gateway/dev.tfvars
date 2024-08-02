@@ -1,5 +1,0 @@
-swagger_file_path="../swagger/foodapi.json"
-stage_name="my-stage"
-vpc_url=""
-vpc_link_name="vpclink-nlb-myapp-dev01"
-load_balancer_name="nlb-alb-myapp-dev01"

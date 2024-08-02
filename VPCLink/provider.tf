@@ -10,5 +10,6 @@ terraform {
 }
 
 provider "aws" {
+  # profile    = "otxlab"
   region     = "us-east-1"
 }

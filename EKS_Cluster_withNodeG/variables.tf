@@ -102,9 +102,11 @@ variable "node_groups" {
     })
   }))
   default = [
-    {
-      name           = "t3-micro-standard"
-      instance_types = ["t3.micro"]
+     {
+      #name           = "t3-micro-standard"
+      name           = "t2-micro-standard1"
+      instance_types = ["t2.micro"]
+      #instance_types = ["t3.micro"]
       ami_type       = "AL2_x86_64"
       capacity_type  = "ON_DEMAND"
       disk_size      = 20
@@ -118,10 +120,12 @@ variable "node_groups" {
       }
     },
     {
-      name           = "t3-micro-spot"
-      instance_types = ["t3.micro"]
+      #name           = "t3-micro-standard"
+      name           = "t2-micro-standard2"
+      instance_types = ["t2.micro"]
+      #instance_types = ["t3.micro"]
       ami_type       = "AL2_x86_64"
-      capacity_type  = "SPOT" #"ON_DEMAND" for dedicated purpose , SPOT can be taken away and given to someone else  
+      capacity_type  = "ON_DEMAND"
       disk_size      = 20
       scaling_config = {
         desired_size = 1
@@ -131,9 +135,24 @@ variable "node_groups" {
       update_config = {
         max_unavailable = 1
       }
-    },
+    }
+    #,
+    #{
+    #  name           = "t3-micro-spot"
+    #  instance_types = ["t3.micro"]
+    #  ami_type       = "AL2_x86_64"
+    #  capacity_type  = "SPOT" #"ON_DEMAND" for dedicated purpose , SPOT can be taken away and given to someone else  
+    #  disk_size      = 20
+    #  scaling_config = {
+    #    desired_size = 1
+    #    max_size     = 1
+    #    min_size     = 1
+    #  }
+    #  update_config = {
+    #    max_unavailable = 1
+    #  }
+    #}
   ]
-
 }
 
 variable "addons" {
@@ -162,22 +181,21 @@ variable "addons" {
   ]
 }
 
-##Replace subnet_ids & security_group_ids
-
 variable "subnet_ids" {
   description = "List of subnet IDs"
   type        = list(string)
-  default     = ["subnet-0376c5d3669473f0e","subnet-0d8b6ce0e1ea294a2","subnet-0a9aaa7831af7d11f","subnet-0e67d107ef2cd7fb5"]
+  default     = [
+   "subnet-0068b3a4192bd1f7c",    "subnet-0d9594b7d0841f515",  "subnet-06e9231507e2a04ce",    "subnet-0f9f963d467f06416"]
 }
 
 variable "security_group_ids" {
   description = "List of security group IDs"
   type        = list(string)
-  default     = ["sg-012e606f3127e34f3","sg-09dee1b9072d399ab","sg-060605c35dec642bf"]
+  default     = ["sg-0d6e9f1803fe5982b"]
 }
 
 variable "private_subnets_id" {
   description = "List of private_subnet IDs"
   type        = list(string)
-  default     = ["subnet-0a9aaa7831af7d11f","subnet-0e67d107ef2cd7fb5"]
+  default     = [  "subnet-06e9231507e2a04ce",    "subnet-0f9f963d467f06416"]
 }

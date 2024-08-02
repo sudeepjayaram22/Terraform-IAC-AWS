@@ -2,6 +2,7 @@
 variable "vpc_link_name" {
   type        = string
   description = "Name of the VPC link"
+  default = "my-vpc-link"
 }
 
 # VPC link name
@@ -15,6 +16,7 @@ variable "vpc_link_description" {
 variable "nlb_name" {
   type        = string
   description = "Name of the Network Load Balancer"
+  default = "my-nlb"
 }
 
 # VPC ID
@@ -29,11 +31,11 @@ variable "env" {
   default     = ""
 }
 
-# Tags for myapp resources
-variable "new_tags" {
+# Tags for resources
+variable "tags" {
   type        = map(string)
   description = "Tags to be applied to the Network Load Balancer"
   default     = {
-    Billing = "IndiaEngineering"
+    Billing = "my-billing"
   }
 }
