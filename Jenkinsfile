@@ -38,6 +38,7 @@ pipeline {
                     sh 'terraform --version'
                 }
             }
+        }
         stage('Setup Networking') {
             steps {
                 dir('Networking') {
