@@ -12,6 +12,9 @@ pipeline {
         TERRAFORM_VERSION = '1.6.1' // Specify the Terraform version you need
 
     }
+    tools {
+        terraform 'Terraform'  // Use the configured tool
+    }
     stages {
         stage('Install Terraform') {
             steps {
