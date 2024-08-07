@@ -16,10 +16,10 @@ pipeline {
           stage('Install Terraform') {
             steps {
                 script {
-                    // Download Terraform
+                    // Download Terraform using curl
                     sh """
                     echo "Downloading Terraform version ${TERRAFORM_VERSION}..."
-                    wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+                    curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
                     """
                     
                     // Unzip Terraform
