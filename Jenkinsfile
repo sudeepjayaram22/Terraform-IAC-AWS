@@ -28,7 +28,7 @@ pipeline {
                         env.VPC_ID = sh(script: 'terraform output -raw vpc_id', returnStdout: true).trim()
                         env.PUBLIC_SUBNETS = sh(script: 'terraform output -json public_subnets', returnStdout: true).trim()
                         env.PRIVATE_SUBNETS = sh(script: 'terraform output -json private_subnets', returnStdout: true).trim()
-                        env.SECURITY_GROUP_ID = sh(script: 'terraform output -raw security_group_id', returnStdout: true).trim()
+                        env.SECURITY_GROUP_ID = sh(script: 'terraform output -json security_group_id', returnStdout: true).trim()
                     }
                 }
             }
