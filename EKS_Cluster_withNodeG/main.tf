@@ -1,3 +1,13 @@
+terraform {
+  backend "s3" {
+    bucket         = "my-state-management"
+    key            = "eks-cluster/terraform.tfstate"
+    region         = "us-east-1"
+    #dynamodb_table = "terraform-lock-table"
+    #encrypt        = true
+  }
+}
+
 resource "aws_launch_template" "eks_launch_template" {
   name          = "eks-node-launch-template"
   instance_type = "t2.micro"

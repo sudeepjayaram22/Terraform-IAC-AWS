@@ -1,13 +1,16 @@
+
+
+
 # State management for EKS
-#terraform {
-#   backend "s3" {
-#     bucket         = "eldoradostatemanagement"
-#     key            = "dev/eks/LoadBalancerController/terraform.tfstate"
+terraform {
+   backend "s3" {
+     bucket         = "my-state-management"
+     key            = "LoadBalancerController/terraform.tfstate"
 #     encrypt        = true
-#     region         = "us-east-2"
+     region         = "us-east-1"
 #     #dynamodb_table = "terraform-state-locks"
-#   }
-#}
+   }
+}
 
 
 data "aws_eks_cluster" "eld_cluster"{

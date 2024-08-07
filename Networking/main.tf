@@ -1,3 +1,14 @@
+terraform {
+  backend "s3" {
+    bucket         = "my-state-management"
+    key            = "networking/terraform.tfstate"
+    region         = "us-east-1"
+    #dynamodb_table = "terraform-lock-table"
+    #encrypt        = true
+  }
+}
+
+
 resource "aws_vpc" "custom_vpc" {
   cidr_block = var.networking.cidr_block
 

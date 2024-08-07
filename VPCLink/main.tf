@@ -1,25 +1,13 @@
 # State management for VPC Link
-#terraform {
-#   backend "s3" {
-#     bucket         = "bucket_name"
-#     key            = "tfstate"
-#     encrypt        = true
-#     region         = "aws_region"
-#     #dynamodb_table = "terraform-state-locks"
-#   }
-#}
-
-# Data source for state management for NLB
-#data "terraform_remote_state" "main_module" {
-#  backend = "s3"
-#  config  = {
-#     bucket         = "eldoradostatemanagement"
-#     key            = "dev/nlb/terraform.tfstate"
-#     encrypt        = true
-#     region         = "us-east-2"
-#     #dynamodb_table = "terraform-state-locks"
-#   }
-#}
+terraform {
+  backend "s3" {
+    bucket         = "my-state-management"
+    key            = "vpc_link/terraform.tfstate"
+    region         = "us-east-1"
+    #dynamodb_table = "terraform-lock-table"
+    #encrypt        = true
+  }
+}
 
 # Data source for the Network Load Balancer
 data "aws_lb" "eld_nlb"{
