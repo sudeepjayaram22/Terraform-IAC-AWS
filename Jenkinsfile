@@ -18,8 +18,8 @@ pipeline {
                 script {
                     // Download Terraform tarball
                     sh """
-                    echo "Downloading Terraform version ${TERRAFORM_VERSION}..."
-                    curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.tar.gz
+                    sudo apt-get update
+                    sudo apt-get install unzip
                     """
                     
                     // Extract Terraform tarball
