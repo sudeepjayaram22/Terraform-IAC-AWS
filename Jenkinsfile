@@ -1,5 +1,5 @@
 pipeline {
-    // agent any
+    agent any
     // agent {
     //     any {
     //         image 'hashicorp/terraform:1.6.1'
