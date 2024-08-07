@@ -5,9 +5,9 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
     }
     stages {
-        stage('Setup Networking') {
+        stage('Destroy VPC Link') {
             steps {
-                dir('Networking') {
+                dir('vpc_link') {
                     script {
                         sh 'terraform init'
                         sh 'terraform destroy --auto-approve'
@@ -15,27 +15,7 @@ pipeline {
                 }
             }
         }
-        stage('Setup EKS Cluster') {
-            steps {
-                dir('EKS_Cluster_withNodeG') {
-                    script {
-                        sh 'terraform init'
-                        sh 'terraform destroy --auto-approve'
-                    }
-                }
-            }
-        }
-        stage('Setup LoadBalancer Controller') {
-            steps {
-                dir('LoadBalancer_Controller') {
-                    script {
-                        sh 'terraform init'
-                        sh 'terraform destroy --auto-approve'
-                    }
-                }
-            }
-        }
-        stage('Setup LoadBalancer') {
+        stage('Destroy LoadBalancer') {
             steps {
                 dir('LoadBalancers') {
                     script {
@@ -45,9 +25,29 @@ pipeline {
                 }
             }
         }
-        stage('Setup VPC Link') {
+        stage('Destroy LoadBalancer Controller') {
             steps {
-                dir('vpc_link') {
+                dir('LoadBalancer_Controller') {
+                    script {
+                        sh 'terraform init'
+                        sh 'terraform destroy --auto-approve'
+                    }
+                }
+            }
+        }
+        stage('Destroy EKS Cluster') {
+            steps {
+                dir('EKS_Cluster_withNodeG') {
+                    script {
+                        sh 'terraform init'
+                        sh 'terraform destroy --auto-approve'
+                    }
+                }
+            }
+        }
+        stage('Destroy Networking') {
+            steps {
+                dir('Networking') {
                     script {
                         sh 'terraform init'
                         sh 'terraform destroy --auto-approve'
