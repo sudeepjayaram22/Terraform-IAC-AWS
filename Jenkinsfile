@@ -16,32 +16,6 @@ pipeline {
         terraform 'Terraform'  // Use the configured tool
     }
     stages {
-        stage('Install Terraform') {
-            steps {
-                script {
-                    // Download Terraform tarball
-                    sh """
-                    sudo apt-get update
-                    sudo apt-get install unzip
-                    """
-                    
-                    // Extract Terraform tarball
-                    sh """
-                    echo "Extracting Terraform..."
-                    tar -xzf terraform_${TERRAFORM_VERSION}_linux_amd64.tar.gz
-                    """
-                    
-                    // Move Terraform binary to /usr/local/bin (requires sudo access)
-                    sh """
-                    echo "Installing Terraform..."
-                    sudo mv terraform /usr/local/bin/
-                    """
-                    
-                    // Verify the installation
-                    sh 'terraform --version'
-                }
-            }
-        }
         stage('Setup Networking') {
             steps {
                 dir('Networking') {
