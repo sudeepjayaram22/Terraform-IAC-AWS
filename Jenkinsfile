@@ -13,32 +13,32 @@ pipeline {
 
     }
     stages {
-          stage('Install Terraform') {
-            steps {
-                script {
-                    // Download Terraform using curl
-                    sh """
-                    echo "Downloading Terraform version ${TERRAFORM_VERSION}..."
-                    curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-                    """
+        //   stage('Install Terraform') {
+        //     steps {
+        //         script {
+        //             // Download Terraform using curl
+        //             sh """
+        //             echo "Downloading Terraform version ${TERRAFORM_VERSION}..."
+        //             curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+        //             """
                     
-                    // Unzip Terraform
-                    sh """
-                    echo "Unzipping Terraform..."
-                    unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-                    """
+        //             // Unzip Terraform
+        //             sh """
+        //             echo "Unzipping Terraform..."
+        //             unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+        //             """
                     
-                    // Move Terraform binary to /usr/local/bin (requires sudo access)
-                    sh """
-                    echo "Installing Terraform..."
-                    sudo mv terraform /usr/local/bin/
-                    """
+        //             // Move Terraform binary to /usr/local/bin (requires sudo access)
+        //             sh """
+        //             echo "Installing Terraform..."
+        //             sudo mv terraform /usr/local/bin/
+        //             """
                     
-                    // Verify the installation
-                    sh 'terraform --version'
-                }
-            }
-        }
+        //             // Verify the installation
+        //             sh 'terraform --version'
+        //         }
+        //     }
+        // }
         stage('Setup Networking') {
             steps {
                 dir('Networking') {
