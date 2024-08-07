@@ -1,16 +1,43 @@
 pipeline {
     // agent any
-    agent {
-        any {
-            image 'hashicorp/terraform:1.6.1'
-            args '-v /root/.aws:/root/.aws'
-        }
-    }
+    // agent {
+    //     any {
+    //         image 'hashicorp/terraform:1.6.1'
+    //         args '-v /root/.aws:/root/.aws'
+    //     }
+    // }
     environment {
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        TERRAFORM_VERSION = '1.6.1' // Specify the Terraform version you need
+
     }
     stages {
+          stage('Install Terraform') {
+            steps {
+                script {
+                    // Download Terraform
+                    sh """
+                    echo "Downloading Terraform version ${TERRAFORM_VERSION}..."
+                    wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+                    """
+                    
+                    // Unzip Terraform
+                    sh """
+                    echo "Unzipping Terraform..."
+                    unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+                    """
+                    
+                    // Move Terraform binary to /usr/local/bin (requires sudo access)
+                    sh """
+                    echo "Installing Terraform..."
+                    sudo mv terraform /usr/local/bin/
+                    """
+                    
+                    // Verify the installation
+                    sh 'terraform --version'
+                }
+            }
         stage('Setup Networking') {
             steps {
                 dir('Networking') {
