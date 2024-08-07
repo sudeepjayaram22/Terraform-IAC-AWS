@@ -42,6 +42,7 @@ pipeline {
                         private_subnets = ${env.PRIVATE_SUBNETS}
                         security_group_id = ${env.SECURITY_GROUP_ID}
                         """
+                        sh 'cat terraform.tfvars'
                         sh 'terraform init'
                         sh 'terraform plan'
                         sh 'terraform apply -auto-approve'
