@@ -1,7 +1,7 @@
 pipeline {
     // agent any
     agent {
-        docker {
+        any {
             image 'hashicorp/terraform:1.6.1'
             args '-v /root/.aws:/root/.aws'
         }
