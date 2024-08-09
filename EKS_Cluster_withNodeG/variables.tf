@@ -184,8 +184,7 @@ variable "addons" {
 variable "public_subnet_ids" {
   description = "List of subnet IDs"
   type        = list(string)
-  default     = [
-   "subnet-0068b3a4192bd1f7c",    "subnet-0d9594b7d0841f515"]
+  default     = ["subnet-0068b3a4192bd1f7c",    "subnet-0d9594b7d0841f515"]
 }
 
 variable "security_group_ids" {
