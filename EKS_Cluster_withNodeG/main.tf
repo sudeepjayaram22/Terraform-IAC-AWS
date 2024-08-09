@@ -57,8 +57,9 @@ resource "aws_launch_template" "eks_launch_template" {
   }
 }
 
-
-
+locals {
+  all_subnet_ids = concat(var.public_subnet_ids ,var.private_subnet_ids)
+}
 
 # EKS Cluster
 resource "aws_eks_cluster" "eks-cluster" {
@@ -68,7 +69,7 @@ resource "aws_eks_cluster" "eks-cluster" {
 
   vpc_config {
     #subnet_ids         = flatten([module.aws_vpc.public_subnets_id, module.aws_vpc.private_subnets_id])
-    subnet_ids         = var.subnet_ids
+    subnet_ids         = local.all_subnet_ids
     #security_group_ids = flatten(module.aws_vpc.security_groups_id)
     security_group_ids = var.security_group_ids
   }
@@ -84,7 +85,7 @@ resource "aws_eks_node_group" "node-ec2" {
   cluster_name    = aws_eks_cluster.eks-cluster.name
   node_group_name = each.value.name
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
-  subnet_ids      = var.private_subnets_id
+  subnet_ids      = var.private_subnet_ids
 
   scaling_config {
     desired_size = try(each.value.scaling_config.desired_size, 1)

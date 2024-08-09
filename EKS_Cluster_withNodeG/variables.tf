@@ -181,11 +181,11 @@ variable "addons" {
   ]
 }
 
-variable "subnet_ids" {
+variable "public_subnet_ids" {
   description = "List of subnet IDs"
   type        = list(string)
   default     = [
-   "subnet-0068b3a4192bd1f7c",    "subnet-0d9594b7d0841f515",  "subnet-06e9231507e2a04ce",    "subnet-0f9f963d467f06416"]
+   "subnet-0068b3a4192bd1f7c",    "subnet-0d9594b7d0841f515"]
 }
 
 variable "security_group_ids" {
@@ -194,7 +194,7 @@ variable "security_group_ids" {
   default     = ["sg-0d6e9f1803fe5982b"]
 }
 
-variable "private_subnets_id" {
+variable "private_subnet_ids" {
   description = "List of private_subnet IDs"
   type        = list(string)
   default     = [  "subnet-06e9231507e2a04ce",    "subnet-0f9f963d467f06416"]
