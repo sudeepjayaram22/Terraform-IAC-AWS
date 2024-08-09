@@ -37,15 +37,18 @@ pipeline {
             steps {
                 dir('EKS_Cluster_withNodeG') {
                     script {
-                        def publicSubnets = readJSON(text: PUBLIC_SUBNETS)
-                        def privateSubnets = readJSON(text: PRIVATE_SUBNETS)
-                        def allSubnets = publicSubnets + privateSubnets
+                        // def publicSubnets = readJSON(text: PUBLIC_SUBNETS)
+                        // def privateSubnets = readJSON(text: PRIVATE_SUBNETS)
+                        // def allSubnets = publicSubnets + privateSubnets
                         // writeFile file: 'terraform.tfvars', text: "subnet_ids = ${groovy.json.JsonOutput.toJson(allSubnets)}"
                 
+                        // subnet_ids = ${groovy.json.JsonOutput.toJson(allSubnets)}
+
+                        
                         writeFile file: 'terraform.tfvars', text: """
-                        subnet_ids = ${groovy.json.JsonOutput.toJson(allSubnets)}
-                        private_subnets = ${env.PRIVATE_SUBNETS}
-                        security_group_id = ${env.SECURITY_GROUP_ID}
+                        public_subnet_ids = ${env.PUBLIC_SUBNETS}
+                        private_subnet_ids = ${env.PRIVATE_SUBNETS}
+                        security_group_ids = ${env.SECURITY_GROUP_ID}
                         """
                         sh 'cat terraform.tfvars'
                         sh 'terraform init'
