@@ -1,8 +1,12 @@
 pipeline {
     agent any
-    environment {
+     environment {
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        TERRAFORM_VERSION = '1.6.1' // Specify the Terraform version you need
+    }
+    tools {
+        terraform 'Terraform'  // Use the configured tool
     }
     stages {
         stage('Destroy VPC Link') {
