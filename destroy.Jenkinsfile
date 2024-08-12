@@ -9,8 +9,12 @@ pipeline {
             steps {
                 dir('vpc_link') {
                     script {
-                        sh 'terraform init'
-                        sh 'terraform destroy --auto-approve'
+                        try {
+                            sh 'terraform init'
+                            sh 'terraform destroy --auto-approve'
+                        } catch (Exception e){
+                            echo "Stage failed: ${e.message}"
+                        }
                     }
                 }
             }
@@ -19,8 +23,12 @@ pipeline {
             steps {
                 dir('LoadBalancers') {
                     script {
-                        sh 'terraform init'
-                        sh 'terraform destroy --auto-approve'
+                        try {
+                            sh 'terraform init'
+                            sh 'terraform destroy --auto-approve'
+                        } catch (Exception e){
+                            echo "Stage failed: ${e.message}"
+                        }
                     }
                 }
             }
@@ -29,8 +37,12 @@ pipeline {
             steps {
                 dir('LoadBalancer_Controller') {
                     script {
-                        sh 'terraform init'
-                        sh 'terraform destroy --auto-approve'
+                        try{
+                            sh 'terraform init'
+                            sh 'terraform destroy --auto-approve'
+                        } catch (Exception e){
+                            echo "Stage failed: ${e.message}"
+                        }
                     }
                 }
             }
@@ -39,8 +51,12 @@ pipeline {
             steps {
                 dir('EKS_Cluster_withNodeG') {
                     script {
-                        sh 'terraform init'
-                        sh 'terraform destroy --auto-approve'
+                        try{
+                            sh 'terraform init'
+                            sh 'terraform destroy --auto-approve'
+                        } catch (Exception e){
+                            echo "Stage failed: ${e.message}"
+                        }
                     }
                 }
             }
